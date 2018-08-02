@@ -1,0 +1,15 @@
+//
+//  ViewController.h
+//  QLProcessButton
+//
+//  Created by 梁啟林 on 2018/8/1.
+//  Copyright © 2018年 liangqilin. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface ViewController : UIViewController
+
+
+@end
+
