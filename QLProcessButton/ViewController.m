@@ -7,12 +7,14 @@
 //
 
 #import "ViewController.h"
-#import "UIButton+Indicator.h"
-#import <objc/runtime.h>
+#import "UIButton+Indicator.h"//显示菊花
+#import "UIButton+QLMessageButton.h"//显示消息红点的
 
 @interface ViewController ()
 
 @property (strong, nonatomic) UIButton *loginButton;
+
+@property (nonatomic, strong) UIButton *navRightBtn;//消息
 
 @end
 
@@ -22,8 +24,31 @@
     [super viewDidLoad];
     
     
+    [self setupViews];
+}
+
+- (void)setupViews{
     [self.loginButton setFrame:CGRectMake(100, 100, 120, 40)];
     [self.view addSubview:self.loginButton];
+    
+    //NAV
+    _navRightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_navRightBtn setImage:[UIImage imageNamed:@"消息"] forState:UIControlStateNormal];
+    [_navRightBtn addTarget:self action:@selector(goOrderPage:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBtnItem = [[UIBarButtonItem alloc] initWithCustomView:_navRightBtn];
+    self.navigationItem.rightBarButtonItem = rightBtnItem;
+    
+    [self.navigationItem.rightBarButtonItem setTintColor:[UIColor redColor]];
+}
+
+#pragma mark - 未读消息红点
+- (void)goOrderPage:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        [_navRightBtn showMessage];
+    }else{
+        [sender hideMessage];
+    }
 }
 
 #pragma mark - 直接在按钮的点击事件中调用几个对外开放的方法就行了。
