@@ -28,6 +28,19 @@
 }
 
 
+### 新增按钮的未读消息
+导入 `#import "UIButton+QLMessageButton.h"`
+```
+//按钮直接调用 就可以在按钮右上角显示小圆点
+- (void)goOrderPage:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        [_navRightBtn showMessage];
+    }else{
+        [sender hideMessage];
+    }    
+}
+
 ```
 
 ### 效果图
